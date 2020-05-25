@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio;
+﻿
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using System;
 using System.Runtime.InteropServices;
@@ -30,8 +31,8 @@ namespace resource.package
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             {
-                service.Menu.Connect(this);
-                cartridge.AnyPreview.Connect(new resource.preview.Xml());
+                cartridge.AnyMenu.Connect(this);
+                cartridge.AnyPreview.Connect(new preview.XML());
             }
         }
 
@@ -39,6 +40,7 @@ namespace resource.package
         {
             {
                 cartridge.AnyPreview.Disconnect();
+                cartridge.AnyMenu.Disconnect();
                 canClose = true;
             }
             return VSConstants.S_OK;
