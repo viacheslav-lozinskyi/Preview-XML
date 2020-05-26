@@ -9,6 +9,7 @@ namespace resource.preview
         internal static class CONSTANT
         {
             public const string EXTENSION = ".XML";
+            public const string HINT = "Tag type";
         }
 
         protected override bool _IsEnabled(string url)
@@ -63,7 +64,7 @@ namespace resource.preview
                         SetComment(__GetComment(node)).
                         SetPattern(__GetPattern(node)).
                         SetFlag((level == 1) ? cartridge.AnyPreview.NAME.FLAG.EXPAND : "").
-                        SetHint("Tag type").
+                        SetHint(CONSTANT.HINT).
                         SetLevel(level).
                         Send();
                 }

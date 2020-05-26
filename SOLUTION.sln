@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xml-preview.vs", "application\xml-preview.vs\xml-preview.vs.csproj", "{FE0D2927-D0F7-471A-8E9B-55A544C7018F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "plugin.vs", "application\plugin.vs\plugin.vs.csproj", "{FE0D2927-D0F7-471A-8E9B-55A544C7018F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
