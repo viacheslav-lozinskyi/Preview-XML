@@ -6,9 +6,14 @@ namespace resource.preview
 {
     public class XML : cartridge.AnyPreview
     {
+        internal static class CONSTANT
+        {
+            public const string EXTENSION = ".XML";
+        }
+
         protected override bool _IsEnabled(string url)
         {
-            return Path.GetExtension(url).ToLower() == ".xml";
+            return Path.GetExtension(url).ToUpper() == CONSTANT.EXTENSION;
         }
 
         protected override bool _IsGeneric(string url)
@@ -28,7 +33,7 @@ namespace resource.preview
                 a_Context.Load(url);
             }
             {
-                __Execute(url, a_Context.DocumentElement, 1, false, context);
+                __Execute(url, a_Context.DocumentElement, 1, context);
             }
             return true;
         }
@@ -38,7 +43,7 @@ namespace resource.preview
             return cartridge.AnyOutput.Write(value);
         }
 
-        private static void __Execute(string url, XmlNode node, int level, bool isAttribute, atom.Trace context)
+        private static void __Execute(string url, XmlNode node, int level, atom.Trace context)
         {
             if (node == null)
             {
@@ -58,7 +63,6 @@ namespace resource.preview
                         SetComment(__GetComment(node)).
                         SetPattern(__GetPattern(node)).
                         SetFlag((level == 1) ? cartridge.AnyPreview.NAME.FLAG.EXPAND : "").
-                        SetPattern(isAttribute ? NAME.PATTERN.PARAMETER : "").
                         SetHint("Tag type").
                         SetLevel(level).
                         Send();
@@ -72,7 +76,7 @@ namespace resource.preview
                             return;
                         }
                         {
-                            __Execute(url, a_Context, level + 1, true, context);
+                            __Execute(url, a_Context, level + 1, context);
                         }
                     }
                 }
@@ -85,7 +89,7 @@ namespace resource.preview
                             return;
                         }
                         {
-                            __Execute(url, a_Context, level + 1, false, context);
+                            __Execute(url, a_Context, level + 1, context);
                         }
                     }
                 }
