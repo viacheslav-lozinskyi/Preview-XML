@@ -17,21 +17,20 @@ namespace resource.package
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasMultipleProjects_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasSingleProject_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    public sealed class XMLPreviewPackage : AsyncPackage
+    public sealed class PreviewXMLPackage : AsyncPackage
     {
         internal static class CONSTANT
         {
-            public const string GUID = "9E4EBB7D-C389-407B-900F-ADCD2E3F1B80";
-            public const string NAME = "XML-Preview";
+            public const string GUID = "8045EC36-7637-4F44-A535-1CE958266F2A";
+            public const string NAME = "Preview-XML";
             public const string DESCRIPTION = "Quick preview for selected XML files";
-            public const string VERSION = "1.0.1.0";
+            public const string VERSION = "1.0.1";
         }
 
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             {
-                cartridge.AnyMenu.Connect(this);
                 cartridge.AnyPreview.Connect(new preview.XML());
             }
         }
@@ -40,7 +39,6 @@ namespace resource.package
         {
             {
                 cartridge.AnyPreview.Disconnect();
-                cartridge.AnyMenu.Disconnect();
                 canClose = true;
             }
             return VSConstants.S_OK;

@@ -14,7 +14,11 @@ namespace resource.preview
 
         protected override bool _IsEnabled(string url)
         {
-            return Path.GetExtension(url).ToUpper() == CONSTANT.EXTENSION;
+            if (File.Exists(url))
+            {
+                return Path.GetExtension(url).ToUpper() == CONSTANT.EXTENSION;
+            }
+            return false;
         }
 
         protected override bool _IsGeneric(string url)
@@ -22,10 +26,10 @@ namespace resource.preview
             return false;
         }
 
-        protected override bool _Activate()
-        {
-            return cartridge.AnyOutput.Activate();
-        }
+        //protected override bool _Activate()
+        //{
+        //    return true;
+        //}
 
         protected override bool _Execute(string url, atom.Trace context)
         {
@@ -37,11 +41,6 @@ namespace resource.preview
                 __Execute(url, a_Context.DocumentElement, 1, context);
             }
             return true;
-        }
-
-        protected override bool _Send(string value)
-        {
-            return cartridge.AnyOutput.Write(value);
         }
 
         private static void __Execute(string url, XmlNode node, int level, atom.Trace context)
