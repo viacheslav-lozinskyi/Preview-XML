@@ -21,16 +21,6 @@ namespace resource.preview
             return false;
         }
 
-        protected override bool _IsGeneric(string url)
-        {
-            return false;
-        }
-
-        //protected override bool _Activate()
-        //{
-        //    return true;
-        //}
-
         protected override bool _Execute(string url, atom.Trace context)
         {
             var a_Context = new XmlDocument();
