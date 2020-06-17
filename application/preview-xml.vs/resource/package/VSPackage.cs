@@ -31,7 +31,7 @@ namespace resource.package
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             {
-                cartridge.AnyPreview.Connect(new preview.XML());
+                cartridge.AnyPreview.Register(new preview.XML(), resource.preview.XML.NAME.EXTENSION);
             }
         }
 

@@ -1,39 +1,28 @@
 
-using System.IO;
 using System.Xml;
 
 namespace resource.preview
 {
     public class XML : cartridge.AnyPreview
     {
-        internal static class CONSTANT
+        internal class NAME
         {
             public const string EXTENSION = ".XML";
             public const string HINT = "Tag type";
         }
 
-        protected override bool _IsEnabled(string url)
-        {
-            if (File.Exists(url))
-            {
-                return Path.GetExtension(url).ToUpper() == CONSTANT.EXTENSION;
-            }
-            return false;
-        }
-
-        protected override bool _Execute(string url, atom.Trace context)
+        protected override void _Execute(atom.Trace context, string url)
         {
             var a_Context = new XmlDocument();
             {
                 a_Context.Load(url);
             }
             {
-                __Execute(url, a_Context.DocumentElement, 1, context);
+                __Execute(a_Context.DocumentElement, 1, context);
             }
-            return true;
         }
 
-        private static void __Execute(string url, XmlNode node, int level, atom.Trace context)
+        private static void __Execute(XmlNode node, int level, atom.Trace context)
         {
             if (node == null)
             {
@@ -43,17 +32,18 @@ namespace resource.preview
             {
                 return;
             }
-            if (context.IsTerminated() == false)
+            if (GetState() == STATE.EXECUTE)
             {
-                if (node.NodeType != XmlNodeType.Comment)
+                if ((node.NodeType != XmlNodeType.Comment) && (string.IsNullOrEmpty(node.Name) == false))
                 {
                     context.
                         Clear().
-                        SetContent(__GetContent(node)).
+                        SetContent(node.Name).
+                        SetValue(node.Value).
                         SetComment(__GetComment(node)).
                         SetPattern(__GetPattern(node)).
-                        SetFlag((level == 1) ? cartridge.AnyPreview.NAME.FLAG.EXPAND : "").
-                        SetHint(CONSTANT.HINT).
+                        SetFlag((level == 1) ? atom.Trace.NAME.FLAG.EXPAND : "").
+                        SetHint(NAME.HINT).
                         SetLevel(level).
                         Send();
                 }
@@ -61,12 +51,12 @@ namespace resource.preview
                 {
                     foreach (XmlAttribute a_Context in node.Attributes)
                     {
-                        if (context.IsTerminated())
+                        if (GetState() != STATE.EXECUTE)
                         {
                             return;
                         }
                         {
-                            __Execute(url, a_Context, level + 1, context);
+                            __Execute(a_Context, level + 1, context);
                         }
                     }
                 }
@@ -74,12 +64,12 @@ namespace resource.preview
                 {
                     foreach (XmlNode a_Context in node.ChildNodes)
                     {
-                        if (context.IsTerminated())
+                        if (GetState() != STATE.EXECUTE)
                         {
                             return;
                         }
                         {
-                            __Execute(url, a_Context, level + 1, context);
+                            __Execute(a_Context, level + 1, context);
                         }
                     }
                 }
@@ -112,14 +102,21 @@ namespace resource.preview
             return "";
         }
 
-        private static string __GetContent(XmlNode node)
-        {
-            return node.Name + (string.IsNullOrEmpty(node.Value) ? "" : (" = " + cartridge.AnyUtility.GetCleanString(node.Value)));
-        }
-
         private static string __GetPattern(XmlNode node)
         {
-            return (node.NodeType == XmlNodeType.Attribute) ? cartridge.AnyPreview.NAME.PATTERN.PARAMETER : "";
+            if (node.NodeType == XmlNodeType.Attribute)
+            {
+                return atom.Trace.NAME.PATTERN.PARAMETER;
+            }
+            if ((node.NodeType == XmlNodeType.Element) && (node.ChildNodes != null) && (node.ChildNodes.Count > 0))
+            {
+                return "";
+            }
+            if ((node.NodeType == XmlNodeType.Element) && (node.Attributes != null) && (node.Attributes.Count > 0))
+            {
+                return "";
+            }
+            return atom.Trace.NAME.PATTERN.VARIABLE;
         }
     };
 }
