@@ -5,12 +5,6 @@ namespace resource.preview
 {
     public class XML : cartridge.AnyPreview
     {
-        internal class NAME
-        {
-            public const string EXTENSION = ".XML";
-            public const string HINT = "Tag type";
-        }
-
         protected override void _Execute(atom.Trace context, string url)
         {
             var a_Context = new XmlDocument();
@@ -39,11 +33,11 @@ namespace resource.preview
                     context.
                         Clear().
                         SetContent(node.Name).
-                        SetValue(node.Value).
+                        SetValue(node.Value == null ? "" : GetCleanString(node.Value)).
                         SetComment(__GetComment(node)).
                         SetPattern(__GetPattern(node)).
                         SetFlag((level == 1) ? atom.Trace.NAME.FLAG.EXPAND : "").
-                        SetHint(NAME.HINT).
+                        SetHint("Tag type").
                         SetLevel(level).
                         Send();
                 }

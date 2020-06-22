@@ -24,6 +24,7 @@ namespace resource.package
             public const string GUID = "8045EC36-7637-4F44-A535-1CE958266F2A";
             public const string NAME = "Preview-XML";
             public const string DESCRIPTION = "Quick preview for selected XML files";
+            public const string EXTENSION = ".XML";
             public const string VERSION = "1.0.1";
         }
 
@@ -31,7 +32,7 @@ namespace resource.package
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             {
-                cartridge.AnyPreview.Register(new preview.XML(), resource.preview.XML.NAME.EXTENSION);
+                cartridge.AnyPreview.Register(cartridge.AnyPreview.MODE.PREVIEW, CONSTANT.EXTENSION, new preview.XML());
             }
         }
 
