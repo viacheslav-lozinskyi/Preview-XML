@@ -16,7 +16,6 @@ namespace resource.package
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionExists_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasMultipleProjects_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasSingleProject_string, PackageAutoLoadFlags.BackgroundLoad)]
-    [ProvideMenuResource("Menus.ctmenu", 1)]
     public sealed class PreviewXMLPackage : AsyncPackage
     {
         internal static class CONSTANT
@@ -25,7 +24,7 @@ namespace resource.package
             public const string NAME = "Preview-XML";
             public const string DESCRIPTION = "Quick preview for selected XML files";
             public const string EXTENSION = ".XML";
-            public const string VERSION = "1.0.1";
+            public const string VERSION = "1.0.2";
         }
 
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
