@@ -73,7 +73,15 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resource\picture\icon.png">
+    <Content Include="extensions.vsext">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="..\..\resource\picture\icon.png">
+      <Link>resource\picture\icon.png</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="..\..\LICENSE">
+      <Link>resource\document\LICENSE</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
   </ItemGroup>
