@@ -3,7 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "preview-xml.vs", "application\preview-xml.vs\preview-xml.vs.csproj", "{FB5A655D-3753-4F5E-A851-23E7C5AEFDB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "preview-xml.vs", "application\preview-xml.vs\preview-xml.vs.csproj", "{4E999A4C-1F34-46CA-938E-41254671A251}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application", "{7802FEA1-4232-4746-A735-B2E170E025A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resource", "resource", "{CD2E24CC-4698-4C72-B7AE-78D7D5330A91}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "picture", "picture", "{9520DA66-D1B1-44C8-8E40-11CFA53E008D}"
+	ProjectSection(SolutionItems) = preProject
+		resource\picture\icon.png = resource\picture\icon.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "video", "video", "{B5563782-0FD5-4383-B458-F36804C1152F}"
+	ProjectSection(SolutionItems) = preProject
+		resource\video\Presentation1.gif = resource\video\Presentation1.gif
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +25,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FB5A655D-3753-4F5E-A851-23E7C5AEFDB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB5A655D-3753-4F5E-A851-23E7C5AEFDB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB5A655D-3753-4F5E-A851-23E7C5AEFDB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB5A655D-3753-4F5E-A851-23E7C5AEFDB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E999A4C-1F34-46CA-938E-41254671A251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E999A4C-1F34-46CA-938E-41254671A251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E999A4C-1F34-46CA-938E-41254671A251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E999A4C-1F34-46CA-938E-41254671A251}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4E999A4C-1F34-46CA-938E-41254671A251} = {7802FEA1-4232-4746-A735-B2E170E025A7}
+		{9520DA66-D1B1-44C8-8E40-11CFA53E008D} = {CD2E24CC-4698-4C72-B7AE-78D7D5330A91}
+		{B5563782-0FD5-4383-B458-F36804C1152F} = {CD2E24CC-4698-4C72-B7AE-78D7D5330A91}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1BB0EA6-6A4F-4731-8167-0CD6174DFD42}
