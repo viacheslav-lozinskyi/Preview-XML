@@ -21,7 +21,7 @@ namespace resource.package
         internal static class CONSTANT
         {
             public const string COPYRIGHT = "Copyright (c) 2020 by Viacheslav Lozinskyi. All rights reserved.";
-            public const string DESCRIPTION = "Quick preview for selected XML files";
+            public const string DESCRIPTION = "Quick preview of XML files";
             public const string EXTENSION = ".XML";
             public const string GUID = "8045EC36-7637-4F44-A535-1CE958266F2A";
             public const string NAME = "Preview-XML";
