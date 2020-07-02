@@ -39,7 +39,7 @@ namespace resource.preview
                             SetComment(__GetComment(node)).
                             SetPattern(__GetPattern(node)).
                             SetFlag((level == 1) ? atom.Trace.NAME.FLAG.EXPAND : "").
-                            SetHint("Tag type").
+                            SetHint("[[Data type]]").
                             SetLevel(level).
                             Send();
                     }
@@ -114,24 +114,20 @@ namespace resource.preview
         {
             switch (node.NodeType)
             {
-                case XmlNodeType.None: return "None";
-                case XmlNodeType.Element: return "Element";
-                case XmlNodeType.Attribute: return "Attribute";
-                case XmlNodeType.Text: return "Text";
+                case XmlNodeType.None: return "[[None]]";
+                case XmlNodeType.Element: return "[[Element]]";
+                case XmlNodeType.Attribute: return "[[Attribute]]";
+                case XmlNodeType.Text: return "[[Text]]";
                 case XmlNodeType.CDATA: return "CDATA";
-                case XmlNodeType.EntityReference: return "Entity Reference";
-                case XmlNodeType.Entity: return "Entity";
-                case XmlNodeType.ProcessingInstruction: return "Processing Instruction";
-                case XmlNodeType.Comment: return "Comment";
-                case XmlNodeType.Document: return "Document";
-                case XmlNodeType.DocumentType: return "Document Type";
-                case XmlNodeType.DocumentFragment: return "Document Fragment";
-                case XmlNodeType.Notation: return "Notation";
-                case XmlNodeType.Whitespace: return "Whitespace";
-                case XmlNodeType.SignificantWhitespace: return "Significant Whitespace";
-                case XmlNodeType.EndElement: return "End Element";
-                case XmlNodeType.EndEntity: return "End Entity";
-                case XmlNodeType.XmlDeclaration: return "Declaration";
+                case XmlNodeType.EntityReference: return "[[Entity Reference]]";
+                case XmlNodeType.Entity: return "[[Entity]]";
+                case XmlNodeType.ProcessingInstruction: return "[[Processing Instruction]]";
+                case XmlNodeType.Comment: return "[[Comment]]";
+                case XmlNodeType.Document: return "[[Document]]";
+                case XmlNodeType.DocumentType: return "[[Document Type]]";
+                case XmlNodeType.DocumentFragment: return "[[Document Fragment]]";
+                case XmlNodeType.Notation: return "[[Notation]]";
+                case XmlNodeType.XmlDeclaration: return "[[Declaration]]";
             }
             return "";
         }
