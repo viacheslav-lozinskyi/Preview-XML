@@ -1,4 +1,4 @@
 /.vs
 /output
-/application/plugin.vs/obj
 /application/preview-xml.vs/obj
+/application/preview-xml.vs/*.user

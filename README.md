@@ -6,3 +6,5 @@
 ![Image](resource/video/Presentation1.gif)
 
 Download the extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=ViacheslavLozinskyi.Preview-XML)
+<hr>
+Data visualization is based on <a href="https://marketplace.visualstudio.com/items?itemName=ViacheslavLozinskyi.MetaProject">MetaProject</a>
