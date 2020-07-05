@@ -1,6 +1,7 @@
 ![Image](https://img.shields.io/github/license/viacheslav-lozinskyi/Preview-XML)
 ![Image](https://img.shields.io/github/issues/viacheslav-lozinskyi/Preview-XML)
 ![Image](https://img.shields.io/github/languages/code-size/viacheslav-lozinskyi/Preview-XML)
+
 ![Image](https://img.shields.io/badge/Visual%20Studio-2019-blueviolet)
 ![Image](https://img.shields.io/badge/Visual%20Studio-2017-blueviolet)
 ![Image](https://img.shields.io/badge/Visual%20Studio-2015-blueviolet)
