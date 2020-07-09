@@ -38,7 +38,7 @@ namespace resource.preview
                             SetValue(__GetValue(node)).
                             SetComment(__GetComment(node)).
                             SetPattern(__GetPattern(node)).
-                            SetFlag((level == 1) ? atom.Trace.NAME.FLAG.EXPAND : "").
+                            SetFlag((level == 1) ? NAME.FLAG.EXPAND : "").
                             SetHint("[[Data type]]").
                             SetLevel(level).
                             Send();
@@ -148,7 +148,7 @@ namespace resource.preview
         {
             if (node.NodeType == XmlNodeType.Attribute)
             {
-                return atom.Trace.NAME.PATTERN.PARAMETER;
+                return NAME.PATTERN.PARAMETER;
             }
             if ((node.Attributes != null) && (node.Attributes.Count > 0))
             {
@@ -156,9 +156,9 @@ namespace resource.preview
             }
             if ((node.ChildNodes != null) && (node.ChildNodes.Count > 0))
             {
-                return __IsChildrenFound(node) ? "" : atom.Trace.NAME.PATTERN.VARIABLE;
+                return __IsChildrenFound(node) ? "" : NAME.PATTERN.VARIABLE;
             }
-            return atom.Trace.NAME.PATTERN.VARIABLE;
+            return NAME.PATTERN.VARIABLE;
         }
     };
 }
