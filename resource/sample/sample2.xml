@@ -1,0 +1,18 @@
+<guestbook>
+  <guest>
+    <fname>Terje</fname>
+    <lname>Beck</lname>
+  </guest>
+  <guest>
+    <fname>Jan</fname>
+    <lname>Refsnes</lname>
+  </guest>
+  <guest>
+    <fname>Torleif</fname>
+    <lname>Rasmussen</lname>
+  </guest>
+  <guest>
+    <fname>anton</fname>
+    <lname>chek</lname>
+  </guest>
+</guestbook>
