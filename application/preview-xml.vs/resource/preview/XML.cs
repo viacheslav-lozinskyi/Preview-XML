@@ -14,6 +14,11 @@ namespace resource.preview
             {
                 __Execute(context, a_Context.DocumentElement, 1);
             }
+            if (GetState() == STATE.CANCEL)
+            {
+                context.
+                    SendWarning(1, NAME.WARNING.TERMINATED);
+            }
         }
 
         private static void __Execute(atom.Trace context, XmlNode node, int level)
@@ -26,7 +31,11 @@ namespace resource.preview
             {
                 return;
             }
-            if (GetState() == STATE.EXECUTE)
+            if (GetState() == STATE.CANCEL)
+            {
+                return;
+            }
+            else
             {
                 if (string.IsNullOrEmpty(node.Name) == false)
                 {
@@ -38,7 +47,7 @@ namespace resource.preview
                             SetValue(__GetValue(node)).
                             SetComment(__GetComment(node)).
                             SetPattern(__GetPattern(node)).
-                            SetFlag((level == 1) ? NAME.FLAG.EXPAND : "").
+                            SetFlag((level == 1) ? NAME.FLAG.EXPAND : NAME.FLAG.NONE).
                             SetHint("[[Data type]]").
                             SetLevel(level).
                             Send();
@@ -48,10 +57,11 @@ namespace resource.preview
                 {
                     foreach (XmlAttribute a_Context in node.Attributes)
                     {
-                        if (GetState() != STATE.EXECUTE)
+                        if (GetState() == STATE.CANCEL)
                         {
                             return;
                         }
+                        else
                         {
                             __Execute(context, a_Context, level + 1);
                         }
@@ -61,10 +71,11 @@ namespace resource.preview
                 {
                     foreach (XmlNode a_Context in node.ChildNodes)
                     {
-                        if (GetState() != STATE.EXECUTE)
+                        if (GetState() == STATE.CANCEL)
                         {
                             return;
                         }
+                        else
                         {
                             __Execute(context, a_Context, level + 1);
                         }
@@ -152,11 +163,11 @@ namespace resource.preview
             }
             if ((node.Attributes != null) && (node.Attributes.Count > 0))
             {
-                return "";
+                return NAME.PATTERN.ELEMENT;
             }
             if ((node.ChildNodes != null) && (node.ChildNodes.Count > 0))
             {
-                return __IsChildrenFound(node) ? "" : NAME.PATTERN.VARIABLE;
+                return __IsChildrenFound(node) ? NAME.PATTERN.ELEMENT : NAME.PATTERN.VARIABLE;
             }
             return NAME.PATTERN.VARIABLE;
         }
