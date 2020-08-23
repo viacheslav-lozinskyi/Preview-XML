@@ -25,7 +25,7 @@ namespace resource.package
             public const string EXTENSION = ".XML";
             public const string GUID = "8045EC36-7637-4F44-A535-1CE958266F2A";
             public const string NAME = "Preview-XML";
-            public const string VERSION = "1.0.6";
+            public const string VERSION = "1.0.7";
         }
 
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)

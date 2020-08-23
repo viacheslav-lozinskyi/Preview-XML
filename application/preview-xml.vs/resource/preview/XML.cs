@@ -47,8 +47,8 @@ namespace resource.preview
                             SetValue(__GetValue(node)).
                             SetComment(__GetComment(node)).
                             SetPattern(__GetPattern(node)).
-                            SetFlag((level == 1) ? NAME.FLAG.EXPAND : NAME.FLAG.NONE).
-                            SetHint("[[Data type]]").
+                            SetState((level == 1) ? NAME.STATE.EXPAND : NAME.STATE.NONE).
+                            SetCommentHint("[[Data type]]").
                             SetLevel(level).
                             Send();
                     }
