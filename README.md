@@ -7,9 +7,12 @@
 ![Image](https://img.shields.io/badge/VS-2015-blueviolet)
 
 ### Now you can look inside XML file not opening it.
+---
 
 ![Image](resource/video/Presentation1.gif)
 
+---
 Download the extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=ViacheslavLozinskyi.Preview-XML)
-<hr>
-Data visualization is based on <a href="https://marketplace.visualstudio.com/items?itemName=ViacheslavLozinskyi.MetaProject">MetaProject</a>
+
+---
+Data visualization is based on [MetaProject](https://marketplace.visualstudio.com/items?itemName=ViacheslavLozinskyi.MetaProject)
