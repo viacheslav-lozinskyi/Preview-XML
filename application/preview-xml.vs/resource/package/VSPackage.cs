@@ -21,14 +21,14 @@ namespace resource.package
             public const string EXTENSION = ".XML";
             public const string GUID = "8045EC36-7637-4F44-A535-1CE958266F2A";
             public const string NAME = "Preview-XML";
-            public const string VERSION = "1.0.8";
+            public const string VERSION = "1.0.9";
         }
 
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             {
                 cartridge.AnyPreview.Connect();
-                cartridge.AnyPreview.Register(cartridge.AnyPreview.MODE.PREVIEW, CONSTANT.EXTENSION, new preview.XML());
+                cartridge.AnyPreview.Register(cartridge.AnyPreview.MODE.PREVIEW, CONSTANT.EXTENSION, new preview.VSPreview());
             }
             {
                 await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);

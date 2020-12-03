@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace resource.preview
 {
-    public class XML : cartridge.AnyPreview
+    internal class VSPreview : cartridge.AnyPreview
     {
         protected override void _Execute(atom.Trace context, string url)
         {
@@ -42,11 +42,10 @@ namespace resource.preview
                     if ((node.NodeType != XmlNodeType.Comment) && __IsContentFound(node))
                     {
                         context.
-                            Clear().
                             SetContent(node.Name).
                             SetValue(__GetValue(node)).
                             SetComment(__GetComment(node)).
-                            SetPattern(__GetPattern(node)).
+                            SetType(__GetType(node)).
                             SetState((level == 1) ? NAME.STATE.EXPAND : NAME.STATE.NONE).
                             SetCommentHint("[[Data type]]").
                             SetLevel(level).
@@ -155,21 +154,21 @@ namespace resource.preview
             }
         }
 
-        private static string __GetPattern(XmlNode node)
+        private static string __GetType(XmlNode node)
         {
             if (node.NodeType == XmlNodeType.Attribute)
             {
-                return NAME.PATTERN.PARAMETER;
+                return NAME.TYPE.PARAMETER;
             }
             if ((node.Attributes != null) && (node.Attributes.Count > 0))
             {
-                return NAME.PATTERN.ELEMENT;
+                return NAME.TYPE.INFO;
             }
             if ((node.ChildNodes != null) && (node.ChildNodes.Count > 0))
             {
-                return __IsChildrenFound(node) ? NAME.PATTERN.ELEMENT : NAME.PATTERN.VARIABLE;
+                return __IsChildrenFound(node) ? NAME.TYPE.INFO : NAME.TYPE.VARIABLE;
             }
-            return NAME.PATTERN.VARIABLE;
+            return NAME.TYPE.VARIABLE;
         }
     };
 }
