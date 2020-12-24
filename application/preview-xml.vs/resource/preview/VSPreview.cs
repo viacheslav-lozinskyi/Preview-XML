@@ -5,19 +5,14 @@ namespace resource.preview
 {
     internal class VSPreview : cartridge.AnyPreview
     {
-        protected override void _Execute(atom.Trace context, string url)
+        protected override void _Execute(atom.Trace context, string url, int level)
         {
             var a_Context = new XmlDocument();
             {
                 a_Context.Load(url);
             }
             {
-                __Execute(context, a_Context.DocumentElement, 1);
-            }
-            if (GetState() == STATE.CANCEL)
-            {
-                context.
-                    SendWarning(1, NAME.WARNING.TERMINATED);
+                __Execute(context, a_Context.DocumentElement, level);
             }
         }
 
@@ -42,14 +37,9 @@ namespace resource.preview
                     if ((node.NodeType != XmlNodeType.Comment) && __IsContentFound(node))
                     {
                         context.
-                            SetContent(node.Name).
-                            SetValue(__GetValue(node)).
-                            SetComment(__GetComment(node)).
-                            SetType(__GetType(node)).
+                            SetComment(__GetComment(node), "[[Data type]]").
                             SetState((level == 1) ? NAME.STATE.EXPAND : NAME.STATE.NONE).
-                            SetCommentHint("[[Data type]]").
-                            SetLevel(level).
-                            Send();
+                            Send(NAME.SOURCE.PREVIEW, __GetType(node), level, node.Name, __GetValue(node));
                     }
                 }
                 if ((node.Attributes != null) && (node.NodeType == XmlNodeType.Element))
