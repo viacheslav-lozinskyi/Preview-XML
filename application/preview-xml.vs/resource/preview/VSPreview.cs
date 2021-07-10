@@ -1,83 +1,83 @@
-
+using System.IO;
 using System.Xml;
 
 namespace resource.preview
 {
-    internal class VSPreview : cartridge.AnyPreview
+    internal class VSPreview : extension.AnyPreview
     {
-        protected override void _Execute(atom.Trace context, string url, int level)
+        protected override void _Execute(atom.Trace context, int level, string url, string file)
         {
             var a_Context = new XmlDocument();
             {
-                a_Context.Load(url);
+                a_Context.Load(file);
             }
             {
-                __Execute(context, a_Context.DocumentElement, level);
+                __Execute(context, level, a_Context.DocumentElement);
             }
         }
 
-        private static void __Execute(atom.Trace context, XmlNode node, int level)
+        private static void __Execute(atom.Trace context, int level, XmlNode data)
         {
-            if (node == null)
+            if (data == null)
             {
                 return;
             }
-            if (string.IsNullOrEmpty(node.Name))
+            if (string.IsNullOrEmpty(data.Name))
             {
                 return;
             }
-            if (GetState() == STATE.CANCEL)
+            if (GetState() == NAME.STATE.CANCEL)
             {
                 return;
             }
             else
             {
-                if (string.IsNullOrEmpty(node.Name) == false)
+                if (string.IsNullOrEmpty(data.Name) == false)
                 {
-                    if ((node.NodeType != XmlNodeType.Comment) && __IsContentFound(node))
+                    if ((data.NodeType != XmlNodeType.Comment) && __IsContentFound(data))
                     {
                         context.
-                            SetComment(__GetComment(node), "[[Data type]]").
-                            SetState((level == 1) ? NAME.STATE.EXPAND : NAME.STATE.NONE).
-                            Send(NAME.SOURCE.PREVIEW, __GetType(node), level, node.Name, __GetValue(node));
+                            SetComment(__GetComment(data), "[[[Data Type]]]").
+                            SetCommand((level == 1) ? NAME.COMMAND.MESSAGE_EXPAND : "").
+                            Send(NAME.SOURCE.PREVIEW, __GetType(data), level, data.Name, __GetValue(data));
                     }
                 }
-                if ((node.Attributes != null) && (node.NodeType == XmlNodeType.Element))
+                if ((data.Attributes != null) && (data.NodeType == XmlNodeType.Element))
                 {
-                    foreach (XmlAttribute a_Context in node.Attributes)
+                    foreach (XmlAttribute a_Context in data.Attributes)
                     {
-                        if (GetState() == STATE.CANCEL)
+                        if (GetState() == NAME.STATE.CANCEL)
                         {
                             return;
                         }
                         else
                         {
-                            __Execute(context, a_Context, level + 1);
+                            __Execute(context, level + 1, a_Context);
                         }
                     }
                 }
-                if ((node.ChildNodes != null) && (node.NodeType == XmlNodeType.Element))
+                if ((data.ChildNodes != null) && (data.NodeType == XmlNodeType.Element))
                 {
-                    foreach (XmlNode a_Context in node.ChildNodes)
+                    foreach (XmlNode a_Context in data.ChildNodes)
                     {
-                        if (GetState() == STATE.CANCEL)
+                        if (GetState() == NAME.STATE.CANCEL)
                         {
                             return;
                         }
                         else
                         {
-                            __Execute(context, a_Context, level + 1);
+                            __Execute(context, level + 1, a_Context);
                         }
                     }
                 }
             }
         }
 
-        private static bool __IsContentFound(XmlNode node)
+        private static bool __IsContentFound(XmlNode data)
         {
-            if (node.Name == "#text")
+            if (data.Name == "#text")
             {
-                var a_Context = node.ParentNode;
+                var a_Context = data.ParentNode;
                 if ((a_Context.Attributes != null) && (a_Context.Attributes.Count > 0))
                 {
                     return true;
@@ -90,19 +90,19 @@ namespace resource.preview
             return true;
         }
 
-        private static bool __IsChildrenFound(XmlNode node)
+        private static bool __IsChildrenFound(XmlNode data)
         {
-            if ((node.Attributes != null) && (node.Attributes.Count > 0))
+            if ((data.Attributes != null) && (data.Attributes.Count > 0))
             {
                 return true;
             }
-            if (node.ChildNodes != null)
+            if (data.ChildNodes != null)
             {
-                if (node.ChildNodes.Count != 1)
+                if (data.ChildNodes.Count != 1)
                 {
                     return true;
                 }
-                if (node.ChildNodes[0].Name == "#text")
+                if (data.ChildNodes[0].Name == "#text")
                 {
                     return false;
                 }
@@ -110,53 +110,53 @@ namespace resource.preview
             return true;
         }
 
-        private static string __GetComment(XmlNode node)
+        private static string __GetComment(XmlNode data)
         {
-            switch (node.NodeType)
+            switch (data.NodeType)
             {
-                case XmlNodeType.None: return "[[None]]";
-                case XmlNodeType.Element: return "[[Element]]";
-                case XmlNodeType.Attribute: return "[[Attribute]]";
-                case XmlNodeType.Text: return "[[Text]]";
+                case XmlNodeType.None: return "[[[None]]]";
+                case XmlNodeType.Element: return "[[[Element]]]";
+                case XmlNodeType.Attribute: return "[[[Attribute]]]";
+                case XmlNodeType.Text: return "[[[Text]]]";
                 case XmlNodeType.CDATA: return "CDATA";
-                case XmlNodeType.EntityReference: return "[[Entity Reference]]";
-                case XmlNodeType.Entity: return "[[Entity]]";
-                case XmlNodeType.ProcessingInstruction: return "[[Processing Instruction]]";
-                case XmlNodeType.Comment: return "[[Comment]]";
-                case XmlNodeType.Document: return "[[Document]]";
-                case XmlNodeType.DocumentType: return "[[Document Type]]";
-                case XmlNodeType.DocumentFragment: return "[[Document Fragment]]";
-                case XmlNodeType.Notation: return "[[Notation]]";
-                case XmlNodeType.XmlDeclaration: return "[[Declaration]]";
+                case XmlNodeType.EntityReference: return "[[[Entity Reference]]]";
+                case XmlNodeType.Entity: return "[[[Entity]]]";
+                case XmlNodeType.ProcessingInstruction: return "[[[Processing Instruction]]]";
+                case XmlNodeType.Comment: return "[[[Comment]]]";
+                case XmlNodeType.Document: return "[[[Document]]]";
+                case XmlNodeType.DocumentType: return "[[[Document Type]]]";
+                case XmlNodeType.DocumentFragment: return "[[[Document Fragment]]]";
+                case XmlNodeType.Notation: return "[[[Notation]]]";
+                case XmlNodeType.XmlDeclaration: return "[[[Declaration]]]";
             }
             return "";
         }
 
-        private static string __GetValue(XmlNode node)
+        private static string __GetValue(XmlNode data)
         {
-            if (string.IsNullOrWhiteSpace(node.Value))
+            if (string.IsNullOrWhiteSpace(data.Value))
             {
-                return __IsChildrenFound(node) ? "" : GetCleanString(node.InnerText);
+                return __IsChildrenFound(data) ? "" : GetFinalText(data.InnerText);
             }
             else
             {
-                return GetCleanString(node.Value);
+                return GetFinalText(data.Value);
             }
         }
 
-        private static string __GetType(XmlNode node)
+        private static string __GetType(XmlNode data)
         {
-            if (node.NodeType == XmlNodeType.Attribute)
+            if (data.NodeType == XmlNodeType.Attribute)
             {
                 return NAME.TYPE.PARAMETER;
             }
-            if ((node.Attributes != null) && (node.Attributes.Count > 0))
+            if ((data.Attributes != null) && (data.Attributes.Count > 0))
             {
-                return NAME.TYPE.INFO;
+                return NAME.TYPE.PARAMETER;
             }
-            if ((node.ChildNodes != null) && (node.ChildNodes.Count > 0))
+            if ((data.ChildNodes != null) && (data.ChildNodes.Count > 0))
             {
-                return __IsChildrenFound(node) ? NAME.TYPE.INFO : NAME.TYPE.VARIABLE;
+                return __IsChildrenFound(data) ? NAME.TYPE.PARAMETER : NAME.TYPE.VARIABLE;
             }
             return NAME.TYPE.VARIABLE;
         }
