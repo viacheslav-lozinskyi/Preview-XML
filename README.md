@@ -8,6 +8,12 @@
 
 ---
 
+[![MetaOutput](https://www.metaoutput.net/_functions/watch?source=GITHUB&size=128x128&project=Preview-XML&url=https://marketplace.visualstudio.com/items?itemName=ViacheslavLozinskyi.Preview-XML)](https://www.metaoutput.net/?utm_source=github.com&utm_medium=referral&utm_campaign=redirect-to-homepage&utm_term=2021-11-21&utm_content=Preview-XML)
+
+### This extension is working only with installed [MetaOutput](https://www.metaoutput.net/?utm_source=github.com&utm_medium=referral&utm_campaign=redirect-to-homepage&utm_term=2021-11-21&utm_content=Preview-XML) extension!
+
+---
+
 ### Now you can look inside [XML](https://en.wikipedia.org/wiki/XML) file not opening it.
 
 ---
@@ -16,14 +22,4 @@
 
 ---
 
-Download the extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=ViacheslavLozinskyi.Preview-XML)
-
----
-
-Data visualization is based on [MetaOutput](https://www.metaoutput.net/?utm_source=github.com&utm_medium=referral&utm_campaign=redirect-to-homepage&utm_term=2021-11-21&utm_content=preview-xml)
-
----
-
-## WARNING:
-
-Correct work of this extension in **Visual Studio 2022** is possible when **[MetaOutput 2022](https://marketplace.visualstudio.com/items?itemName=ViacheslavLozinskyi.MetaOutput-2022)** extension is installed.
+Data visualization is based on [MetaOutput](https://www.metaoutput.net/?utm_source=github.com&utm_medium=referral&utm_campaign=redirect-to-homepage&utm_term=2021-11-21&utm_content=Preview-XML)
