@@ -148,17 +148,17 @@ namespace resource.preview
         {
             if (data.NodeType == XmlNodeType.Attribute)
             {
-                return NAME.TYPE.PARAMETER;
+                return NAME.EVENT.PARAMETER;
             }
             if ((data.Attributes != null) && (data.Attributes.Count > 0))
             {
-                return NAME.TYPE.PARAMETER;
+                return NAME.EVENT.PARAMETER;
             }
             if ((data.ChildNodes != null) && (data.ChildNodes.Count > 0))
             {
-                return __IsChildrenFound(data) ? NAME.TYPE.PARAMETER : NAME.TYPE.VARIABLE;
+                return __IsChildrenFound(data) ? NAME.EVENT.PARAMETER : NAME.EVENT.VARIABLE;
             }
-            return NAME.TYPE.VARIABLE;
+            return NAME.EVENT.VARIABLE;
         }
     };
 }
