@@ -26,7 +26,7 @@ namespace resource.preview
             {
                 return;
             }
-            if (GetState() == NAME.STATE.CANCEL)
+            if (GetState() == NAME.STATE.WORK.CANCEL)
             {
                 return;
             }
@@ -37,8 +37,8 @@ namespace resource.preview
                     if ((data.NodeType != XmlNodeType.Comment) && __IsContentFound(data))
                     {
                         context.
+                            SetTrace(null, (level == 1) ? NAME.STATE.TRACE.EXPAND : NAME.STATE.TRACE.NONE).
                             SetComment(__GetComment(data), "[[[Data Type]]]").
-                            SetCommand((level == 1) ? NAME.COMMAND.MESSAGE_EXPAND : "").
                             Send(NAME.SOURCE.PREVIEW, __GetType(data), level, data.Name, __GetValue(data));
                     }
                 }
@@ -46,7 +46,7 @@ namespace resource.preview
                 {
                     foreach (XmlAttribute a_Context in data.Attributes)
                     {
-                        if (GetState() == NAME.STATE.CANCEL)
+                        if (GetState() == NAME.STATE.WORK.CANCEL)
                         {
                             return;
                         }
@@ -60,7 +60,7 @@ namespace resource.preview
                 {
                     foreach (XmlNode a_Context in data.ChildNodes)
                     {
-                        if (GetState() == NAME.STATE.CANCEL)
+                        if (GetState() == NAME.STATE.WORK.CANCEL)
                         {
                             return;
                         }
